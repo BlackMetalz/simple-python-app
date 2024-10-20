@@ -8,7 +8,7 @@ data_store = {}
 
 @app.route('/', methods=['GET'])
 def hello():
-    return "Hello simple python flask app!. Version 1.0"
+    return "Hello simple python flask app!. Version 2.0"
 
 @app.route('/data', methods=['GET'])
 def get_data():
