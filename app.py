@@ -55,5 +55,15 @@ def put_data():
     data_store.update(data)
     return jsonify(data_store), 201
 
+# Route that returns a 4xx response
+@app.route('/bad_request', methods=['GET'])
+def bad_request():
+    return jsonify({"error": "This is a bad request"}), 400
+
+# Route that returns a 5xx response
+@app.route('/server_error', methods=['GET'])
+def server_error():
+    return jsonify({"error": "This is a server error"}), 500
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
