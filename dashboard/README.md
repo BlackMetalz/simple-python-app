@@ -27,3 +27,25 @@ scrape_configs:
       username: 'user'
       password: 'password'
 ```
+
+- Query example
+```
+### Resource Usage ###
+# Virtual memory
+process_virtual_memory_bytes{serviceName="$Service"} / 1024 / 1024
+# Resident memory
+process_resident_memory_bytes{serviceName="$Service"} / 1024 / 1024
+# Process CPU
+avg(rate(process_cpu_seconds_total{serviceName="$Service"}[$__range]))
+
+### Reponses Rate ###
+# Rate success responses
+sum(increase(flask_http_request_total{status!~"4..|5.."}[$__range]))
+(sum(rate(flask_http_request_total{status!~"4..|5.."}[$__range]))  /  sum(rate(flask_http_request_total[$__range]))) * 100
+# Rate 4xx responses
+sum(increase(flask_http_request_total{status=~"4.."}[$__range]))
+(sum(rate(flask_http_request_total{status=~"4.."}[$__range])) / sum(rate(flask_http_request_total[$__range]))) * 100
+# Rate 5xx responses
+sum(increase(flask_http_request_total{status=~"5.."}[$__range]))
+(sum(rate(flask_http_request_total{status=~"5.."}[$__range])) / sum(rate(flask_http_request_total[$__range]))) * 100
+```
