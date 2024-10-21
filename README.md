@@ -1,0 +1,3 @@
+### Simple python api with Flask xD
+- Create new `.env` file for basic auth of exporter (/metrics). Example is from `.env.example`
+- ... hmmm ...
