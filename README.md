@@ -1,9 +1,11 @@
 ### Simple python api with Flask xD
 - Create new `.env` file for basic auth of exporter (/metrics). Example is from `.env.example`
 - For grafana dashboard and exporter config: go to folder /dashboard in this repo!
+- Moslty this will works if you don't use ingress or api gateway since they all have feature to monitor request xD.
+- Recommend to use if you have prometheus and application only, not k8s or other thing xD
 - Testing request with wrk, for simulator request 4xx/5xx
+`wrk -t12 -c400 -d30s "http://10.0.0.1:31000/bad_request"`
 ```
-wrk -t12 -c400 -d30s "http://10.0.0.1:31000/bad_request"
 Running 30s test @ http://10.0.0.1:31000/bad_request
   12 threads and 400 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
@@ -14,9 +16,10 @@ Running 30s test @ http://10.0.0.1:31000/bad_request
   Non-2xx or 3xx responses: 28280
 Requests/sec:    941.77
 Transfer/sec:    191.30KB
+```
 
-
-wrk -t2 -c400 -d120s "http://10.0.0.1:31000/server_error"
+`wrk -t2 -c400 -d120s "http://10.0.0.1:31000/server_error"`
+```
 Running 2m test @ http://10.0.0.1:31000/server_error
   2 threads and 400 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
